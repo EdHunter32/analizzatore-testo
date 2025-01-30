@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizzatore di Testo</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Collega il file CSS -->
+</head>
+
+
+<body>
+
+    <div class="container">
+        <h1>Analizzatore di Testo</h1>
+
+        <textarea id="inputTesto" placeholder="Inserisci il testo qui..."></textarea>
+        <button onclick="analizzaEVisualizza()">Analizza</button>
+
+        <h2>Risultati:</h2>
+
+        <div class="risultati-container">
+            <div class="testo-analisi">
+                <p><strong>Totale parole:</strong> <span id="totaleParole"></span></p>
+                <p><strong>Totale parole dopo il filtro:</strong> <span id="totaleParoleFiltrate"></span></p>
+                <p><strong>Lunghezza media parole:</strong> <span id="lunghezzaMedia"></span></p>
+
+                <h3>Frequenza delle parole:</h3>
+                <ul id="listaFrequenza"></ul>
+            </div>
+
+            <div class="grafico-container">
+                <h3>Grafico Frequenza delle Parole:</h3>
+                <canvas id="graficoFrequenza"></canvas>
+            </div>
+        </div>
+
+
+
+        <!-- Questo div è necessario per l'animazione -->
+        <div id="risultato"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</body>
+
+
+
+</html>
