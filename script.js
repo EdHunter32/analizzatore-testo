@@ -148,6 +148,17 @@ function pulisciTesto() {
     }
 }
 
+function aggiornaContatori() {
+    let testo = document.getElementById("inputTesto").value;
+
+    let numeroCaratteri = testo.length;
+    let numeroParole = testo.trim().length > 0 ? testo.trim().split(/\s+/).length : 0; // Contiamo le parole evitando spazi doppi
+
+    document.getElementById("contaCaratteri").textContent = numeroCaratteri;
+    document.getElementById("contaParole").textContent = numeroParole;
+}
+
+
 
 function disegnaGrafico(frequenza) {
     let ctx = document.getElementById("graficoFrequenza").getContext("2d");

@@ -14,7 +14,10 @@
     <div class="container">
         <h1>Analizzatore di Testo</h1>
 
-        <textarea id="inputTesto" placeholder="Inserisci il testo qui..."></textarea>
+        <textarea id="inputTesto" placeholder="Inserisci il testo qui..." oninput="aggiornaContatori()"></textarea>
+        <p><strong>Caratteri:</strong> <span id="contaCaratteri">0</span></p>
+        <p><strong>Parole:</strong> <span id="contaParole">0</span></p>
+
         <button onclick="analizzaEVisualizza()">Analizza</button>
         <button onclick="pulisciTesto()">Pulisci</button>
 
