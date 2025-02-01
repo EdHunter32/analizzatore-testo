@@ -132,6 +132,23 @@ function analizzaEVisualizza() {
     disegnaGrafico(frequenza);
 }
 
+function pulisciTesto() {
+    document.getElementById("inputTesto").value = ""; // Cancella l'input
+    document.getElementById("totaleParole").textContent = "";
+    document.getElementById("totaleParoleFiltrate").textContent = "";
+    document.getElementById("lunghezzaMedia").textContent = "";
+    document.getElementById("lunghezzaMediaFrasi").textContent = "";
+    document.getElementById("parolaPiuLunga").textContent = "";
+    document.getElementById("parolaPiuCorta").textContent = "";
+    document.getElementById("listaFrequenza").innerHTML = ""; // Svuota la lista delle frequenze
+
+    // Puliamo anche il grafico se esiste
+    if (window.graficoFrequenza instanceof Chart) {
+        window.graficoFrequenza.destroy();
+    }
+}
+
+
 function disegnaGrafico(frequenza) {
     let ctx = document.getElementById("graficoFrequenza").getContext("2d");
 
