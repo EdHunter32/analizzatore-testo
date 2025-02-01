@@ -54,6 +54,32 @@ function lunghezzaMedia(parole) {
     return (totaleLettere / parole.length).toFixed(2); // Due decimali
 }
 
+function lunghezzaMediaFrasi(testo) {
+    let frasi = testo
+        .split(/[.!?]+/)  // Divide il testo su ., ! e ?
+        .map(frase => frase.trim())  // Rimuove spazi iniziali e finali da ogni frase
+        .filter(frase => frase.length > 0); // Elimina eventuali frasi vuote
+
+    let numeroFrasi = frasi.length;
+
+    console.log("Frasi trovate (dopo pulizia):", frasi); // Debug: stampa le frasi senza spazi iniziali
+    console.log("Numero di frasi:", numeroFrasi);
+
+    if (numeroFrasi === 0) return 0;
+
+    let totaleParole = frasi.reduce((acc, frase) => {
+        let numeroParole = frase.split(/\s+/).length; // Conta le parole nella frase
+        console.log(`Parole nella frase "${frase}":`, numeroParole); // Debug: mostra parole per frase
+        return acc + numeroParole;
+    }, 0);
+
+    console.log("Totale parole:", totaleParole);
+    return (totaleParole / numeroFrasi).toPrecision(3); // Mantiene due decimali
+}
+
+
+
+
 
 
 
@@ -66,10 +92,14 @@ function analizzaEVisualizza() {
     let totaleParoleFiltrate = contaParole(paroleFiltrate);
     let frequenza = contaFrequenza(paroleFiltrate);
     let lunghezzaMediaParole = lunghezzaMedia(paroleFiltrate);
+    let lunghezzaMediaFrasiVal = lunghezzaMediaFrasi(testo); // Nuovo valore
 
     document.getElementById("totaleParole").textContent = totaleParole;
     document.getElementById("totaleParoleFiltrate").textContent = totaleParoleFiltrate;
     document.getElementById("lunghezzaMedia").textContent = lunghezzaMediaParole;
+
+    // Aggiungiamo la nuova statistica
+    document.getElementById("lunghezzaMediaFrasi").textContent = lunghezzaMediaFrasiVal;
 
     let listaFrequenza = document.getElementById("listaFrequenza");
     listaFrequenza.innerHTML = "";
