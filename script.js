@@ -77,6 +77,16 @@ function lunghezzaMediaFrasi(testo) {
     return (totaleParole / numeroFrasi).toPrecision(3); // Mantiene due decimali
 }
 
+function trovaParolaPiuLunga(parole) {
+    if (parole.length === 0) return ""; // Se non ci sono parole, restituisce stringa vuota
+    return parole.reduce((max, parola) => parola.length > max.length ? parola : max, "");
+}
+
+function trovaParolaPiuCorta(parole) {
+    let paroleFiltrate = parole.filter(parola => !stopwords.includes(parola)); // Rimuove stopwords
+    if (paroleFiltrate.length === 0) return ""; // Se tutte le parole sono stopwords, restituisce stringa vuota
+    return paroleFiltrate.reduce((min, parola) => parola.length < min.length ? parola : min, paroleFiltrate[0]);
+}
 
 
 
@@ -93,13 +103,18 @@ function analizzaEVisualizza() {
     let frequenza = contaFrequenza(paroleFiltrate);
     let lunghezzaMediaParole = lunghezzaMedia(paroleFiltrate);
     let lunghezzaMediaFrasiVal = lunghezzaMediaFrasi(testo); // Nuovo valore
+    let parolaPiuLunga = trovaParolaPiuLunga(parole);
+    let parolaPiuCorta = trovaParolaPiuCorta(parole);
 
     document.getElementById("totaleParole").textContent = totaleParole;
     document.getElementById("totaleParoleFiltrate").textContent = totaleParoleFiltrate;
     document.getElementById("lunghezzaMedia").textContent = lunghezzaMediaParole;
-
-    // Aggiungiamo la nuova statistica
     document.getElementById("lunghezzaMediaFrasi").textContent = lunghezzaMediaFrasiVal;
+
+    // Aggiungiamo le nuove statistiche
+    document.getElementById("parolaPiuLunga").textContent = parolaPiuLunga;
+    document.getElementById("parolaPiuCorta").textContent = parolaPiuCorta;
+
 
     let listaFrequenza = document.getElementById("listaFrequenza");
     listaFrequenza.innerHTML = "";
