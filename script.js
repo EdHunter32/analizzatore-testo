@@ -146,6 +146,10 @@ function pulisciTesto() {
     if (window.graficoFrequenza instanceof Chart) {
         window.graficoFrequenza.destroy();
     }
+
+    // 🔹 Aggiungiamo questo per resettare i contatori:
+    document.getElementById("contaCaratteri").textContent = "0";
+    document.getElementById("contaParole").textContent = "0";
 }
 
 function aggiornaContatori() {

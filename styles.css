@@ -137,3 +137,65 @@ canvas {
     max-width: 100%;
     height: auto;
 }
+
+/* Stile per i contatori di caratteri e parole */
+.contatori {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+}
+
+.contatori span {
+    color: #007BFF;
+}
+
+/* Stile per l'area dei risultati */
+.risultati-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.risultati-container p {
+    font-size: 18px;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Evidenziare i numeri nei risultati */
+.risultati-container span {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Stile per i pulsanti */
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Stile per il pulsante "Pulisci" per differenziarlo */
+button:nth-of-type(2) {
+    background-color: #DC3545;
+}
+
+button:nth-of-type(2):hover {
+    background-color: #a71d2a;
+}
