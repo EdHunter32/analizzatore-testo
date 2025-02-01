@@ -93,7 +93,9 @@ function trovaParolaPiuCorta(parole) {
 
 
 
-// Funzione per gestire l'input dall'utente e mostrare il risultato
+/**
+ * Analizza il testo e aggiorna i risultati nella UI.
+ */
 function analizzaEVisualizza() {
     let testo = document.getElementById("inputTesto").value;
     let parole = analizzaTesto(testo);
@@ -106,51 +108,55 @@ function analizzaEVisualizza() {
     let parolaPiuLunga = trovaParolaPiuLunga(parole);
     let parolaPiuCorta = trovaParolaPiuCorta(parole);
 
-    document.getElementById("totaleParole").textContent = totaleParole;
-    document.getElementById("totaleParoleFiltrate").textContent = totaleParoleFiltrate;
-    document.getElementById("lunghezzaMedia").textContent = lunghezzaMediaParole;
-    document.getElementById("lunghezzaMediaFrasi").textContent = lunghezzaMediaFrasiVal;
+    aggiornaUI({
+        totaleParole,
+        totaleParoleFiltrate,
+        lunghezzaMediaParole,
+        lunghezzaMediaFrasiVal,
+        parolaPiuLunga,
+        parolaPiuCorta,
+        frequenza
+    });
 
-    // Aggiungiamo le nuove statistiche
-    document.getElementById("parolaPiuLunga").textContent = parolaPiuLunga;
-    document.getElementById("parolaPiuCorta").textContent = parolaPiuCorta;
+    disegnaGrafico(frequenza);
+}
 
+// 🔹 Funzione separata per aggiornare l'interfaccia utente
+function aggiornaUI(dati) {
+    document.getElementById("totaleParole").textContent = dati.totaleParole;
+    document.getElementById("totaleParoleFiltrate").textContent = dati.totaleParoleFiltrate;
+    document.getElementById("lunghezzaMedia").textContent = dati.lunghezzaMediaParole;
+    document.getElementById("lunghezzaMediaFrasi").textContent = dati.lunghezzaMediaFrasiVal;
+    document.getElementById("parolaPiuLunga").textContent = dati.parolaPiuLunga;
+    document.getElementById("parolaPiuCorta").textContent = dati.parolaPiuCorta;
 
     let listaFrequenza = document.getElementById("listaFrequenza");
     listaFrequenza.innerHTML = "";
 
-    for (let parola in frequenza) {
+    for (let parola in dati.frequenza) {
         let li = document.createElement("li");
-        li.textContent = `${parola}: ${frequenza[parola]} volte`;
+        li.textContent = `${parola}: ${dati.frequenza[parola]} volte`;
         listaFrequenza.appendChild(li);
     }
-
-    // Attiviamo l'animazione
-    document.getElementById("risultato").classList.add("show");
-
-    // Disegnare il grafico dopo aver aggiornato i risultati
-    disegnaGrafico(frequenza);
 }
 
 function pulisciTesto() {
     document.getElementById("inputTesto").value = ""; // Cancella l'input
-    document.getElementById("totaleParole").textContent = "";
-    document.getElementById("totaleParoleFiltrate").textContent = "";
-    document.getElementById("lunghezzaMedia").textContent = "";
-    document.getElementById("lunghezzaMediaFrasi").textContent = "";
-    document.getElementById("parolaPiuLunga").textContent = "";
-    document.getElementById("parolaPiuCorta").textContent = "";
-    document.getElementById("listaFrequenza").innerHTML = ""; // Svuota la lista delle frequenze
 
-    // Puliamo anche il grafico se esiste
+    let elementiDaSvuotare = [
+        "totaleParole", "totaleParoleFiltrate", "lunghezzaMedia", "lunghezzaMediaFrasi",
+        "parolaPiuLunga", "parolaPiuCorta", "contaCaratteri", "contaParole"
+    ];
+
+    elementiDaSvuotare.forEach(id => document.getElementById(id).textContent = "0");
+
+    document.getElementById("listaFrequenza").innerHTML = "";
+
     if (window.graficoFrequenza instanceof Chart) {
         window.graficoFrequenza.destroy();
     }
-
-    // 🔹 Aggiungiamo questo per resettare i contatori:
-    document.getElementById("contaCaratteri").textContent = "0";
-    document.getElementById("contaParole").textContent = "0";
 }
+
 
 function aggiornaContatori() {
     let testo = document.getElementById("inputTesto").value;
