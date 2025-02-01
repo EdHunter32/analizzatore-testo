@@ -1,5 +1,10 @@
 console.log("Live Server è attivo! 🚀");
-const stopwords = ["la", "il", "e", "è", "di", "a", "che", "in", "un", "con", "per", "su", "le", "gli", "della", "delle", "dei", "dal", "dallo", "sul"];
+const stopwords = [
+    "la", "le", "il", "lo", "gli", "i", "un", "uno", "una", "delle", "dei", "della", "dal", "dallo",
+    "di", "a", "da", "in", "con", "su", "per", "tra", "fra", "e", "è", "che", "come", "quando", "dove",
+    "mentre", "chi", "quale", "quanto", "quanti", "quanta", "questa", "questo", "quelle", "quelli",
+    "ma", "se", "allora", "anche", "poi", "così", "adesso", "oltre", "ancora", "proprio", "quindi"
+];
 // Funzione per analizzare il testo e restituire l'array di parole pulite
 function analizzaTesto(testo) {
     console.log("Testo ricevuto:", testo);
@@ -18,13 +23,17 @@ function analizzaTesto(testo) {
 
 function filtraStopwords(parole) {
     let paroleFiltrate = parole.filter(parola => {
-        let vieneRimossa = stopwords.includes(parola);
-        if (vieneRimossa) console.log(`Rimossa: ${parola}`);
-        return !vieneRimossa;
+        let parolaFiltrata = parola.toLowerCase(); // Convertiamo tutto in minuscolo
+        let vieneRimossa = stopwords.includes(parolaFiltrata); // Controlliamo se è una stopword
+        if (vieneRimossa) console.log(`Rimossa: ${parola}`); // Log per debug
+        return !vieneRimossa; // Manteniamo solo le parole non stopwords
     });
 
+    console.log("Parole finali dopo il filtraggio:", paroleFiltrate); // Log per debug finale
     return paroleFiltrate;
 }
+
+
 
 
 function contaParole(parole) {
